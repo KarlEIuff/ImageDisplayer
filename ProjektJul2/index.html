@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset=utf-8 />
+    <title>En simpel bildvisare</title>
+
+    <!--jQuery 1.2.3 Library Importeras från google libraries för att kunna visa bild: https://developers.google.com/speed/libraries#jquery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.2.3/jquery.min.js"></script>
+    <script>
+        // Lista med namn på tidigare uppladdade bilder
+        var listOfHistory = new Array();
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                // Ritar upp bilden från URL
+                reader.onload = function (e) {
+                    $('#bild').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+                listOfHistory.push(input);
+
+                /* Tänkte även visa namn på tidigare uppladdade bilder i en lista, så här långt kom jag
+                for (var i; i < listOfHistory.length; i++) {
+                    document.write(listOfHistory[i]);
+                }*/
+                
+            }
+        }
+    </script>
+    <style>
+        .text {
+            text-align: center;
+            border: 5px solid red;
+            margin-left: 400px;
+            margin-right: 400px;
+            margin-bottom: 10px;
+            background-color: black;
+        }
+        .text h1 {
+            color: red;
+        }
+        .text input {
+            color: red;
+        }
+    </style>
+</head>
+    <!--Ville göra så att man kunde visa flera bilder samtidigt men lyckades inte lista ut detta, 
+        så du får nöja dig med en i taget-->
+<body style="background-color: black;">
+    <div class="text">
+        <h1>Image Displayer</h1>
+        <!--Uppladdning av bild-->
+        <input type='file' onchange="readURL(this);" />
+    </div>
+    <!--Bilden-->
+    <img id="bild" src="#" alt="" />
+</body>
+</html>
